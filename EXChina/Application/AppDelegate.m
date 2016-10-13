@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "EXTabBarController.h"
+#import "UIColor+Util.h"
+#import "EXTabBar.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +19,47 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    _inNightMode = NO;
+    /************ 控件外观设置 **************/
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    [[UITabBar appearance] setTintColor:[UIColor colorWithHex:0x24CF5F]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x24cf5f]} forState:UIControlStateSelected];
+    //    [EXTabBar appearance].translucent = NO;
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor navigationbarColor]];
+    [[UITabBar appearance] setBarTintColor:[UIColor titleBarColor]];
+    
+    [UISearchBar appearance].tintColor = [UIColor colorWithHex:0x15A230];
+    //    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setCornerRadius:14.0];
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setAlpha:0.6];
+    
+    
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor colorWithHex:0xDCDCDC];
+    pageControl.currentPageIndicatorTintColor = [UIColor grayColor];
+    
+    [[UITextField appearance] setTintColor:[UIColor nameColor]];
+    [[UITextView appearance]  setTintColor:[UIColor nameColor]];
+    
+    //1.创建窗口
+    self.window = [[UIWindow alloc] init];
+    self.window.frame = [UIScreen mainScreen].bounds;
+    
+    EXTabBarController *tabBarVc = [[EXTabBarController alloc] init];
+    
+    
+    //2.添加根控制器
+    self.window.rootViewController = tabBarVc;
+    //3.显示主窗口
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
